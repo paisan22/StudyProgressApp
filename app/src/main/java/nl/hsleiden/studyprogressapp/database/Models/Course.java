@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "course")
 public class Course {
 
@@ -14,7 +12,7 @@ public class Course {
 
     private String title;
     private String description;
-    private Date startStudyYear;
+    private int startStudyYear;
     private int ECs;
     private String notes;
     private boolean done;
@@ -22,7 +20,7 @@ public class Course {
     /**
      * Wordt gebruikt door Room.
      */
-    public Course(int id, String title, String description, Date startStudyYear, int ECs, String notes, boolean done) {
+    public Course(int id, String title, String description, int startStudyYear, int ECs, String notes, boolean done) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -36,7 +34,7 @@ public class Course {
      * Omdat room niet met meerdere constructors kan omgaan wordt hier ignore gebruikt.
      */
     @Ignore
-    public Course(String title, String description, Date startStudyYear, int ECs, String notes, boolean done) {
+    public Course(String title, String description, int startStudyYear, int ECs, String notes, boolean done) {
         this.title = title;
         this.description = description;
         this.startStudyYear = startStudyYear;
@@ -69,11 +67,11 @@ public class Course {
         this.description = description;
     }
 
-    public Date getStartStudyYear() {
+    public int getStartStudyYear() {
         return startStudyYear;
     }
 
-    public void setStartStudyYear(Date startStudyYear) {
+    public void setStartStudyYear(int startStudyYear) {
         this.startStudyYear = startStudyYear;
     }
 

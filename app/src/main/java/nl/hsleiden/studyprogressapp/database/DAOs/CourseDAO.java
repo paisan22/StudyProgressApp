@@ -18,6 +18,9 @@ public interface CourseDAO {
     @Insert
     void insertAllCourses(Course... courses);
 
+    @Insert
+    void insertCourse(Course course);
+
     @Query("SELECT COUNT(id) FROM course")
     int getNumberOfRows();
 
