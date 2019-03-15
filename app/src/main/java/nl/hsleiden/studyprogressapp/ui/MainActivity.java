@@ -27,15 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-        CourseListAdapter courseListAdapter = new CourseListAdapter(this);
-        mainBinding.recycleViewCourseList.setAdapter(courseListAdapter);
-        mainBinding.recycleViewCourseList.setLayoutManager(linearLayoutManager);
+
 
         viewModelFactory = new MainActivityViewModelFactory(this);
 
         MainActivityViewModel viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainActivityViewModel.class);
+
+        CourseListAdapter courseListAdapter = new CourseListAdapter(viewModel.getAllCourses().getValue());
+        mainBinding.recycleViewCourseList.setAdapter(courseListAdapter);
+        mainBinding.recycleViewCourseList.setHasFixedSize(true);
+        mainBinding.recycleViewCourseList.setLayoutManager(linearLayoutManager);
 
         viewModel.getAllCourses().observe(this, list ->{
             courseListAdapter.setCourses(list);

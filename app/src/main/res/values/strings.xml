@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Study Progress App</string>
     <string name="app_title">Study Progress App</string>
-    <string name="course_list_item_title">IOPR</string>
-    <string name="course_list_item_ec">3</string>
+    <string name="course_subject">subject name</string>
+    <string name="course_ects">3</string>
+    <string name="course_grade">0</string>
 </resources>

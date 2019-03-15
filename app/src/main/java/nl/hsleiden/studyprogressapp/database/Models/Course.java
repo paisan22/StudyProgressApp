@@ -10,37 +10,34 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String title;
-    private String description;
-    private int startStudyYear;
-    private int ECs;
+    private String name;
+    private int ects;
+    private double grade;
     private String notes;
-    private boolean done;
+    private int period;
 
     /**
      * Wordt gebruikt door Room.
      */
-    public Course(int id, String title, String description, int startStudyYear, int ECs, String notes, boolean done) {
+    public Course(int id, String name, int ects, double grade, String notes, int period) {
         this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startStudyYear = startStudyYear;
-        this.ECs = ECs;
+        this.name = name;
+        this.ects = ects;
+        this.grade = grade;
         this.notes = notes;
-        this.done = done;
+        this.period = period;
     }
 
     /**
      * Omdat room niet met meerdere constructors kan omgaan wordt hier ignore gebruikt.
      */
     @Ignore
-    public Course(String title, String description, int startStudyYear, int ECs, String notes, boolean done) {
-        this.title = title;
-        this.description = description;
-        this.startStudyYear = startStudyYear;
-        this.ECs = ECs;
+    public Course(String name, int ects, double grade, String notes, int period) {
+        this.name = name;
+        this.ects = ects;
+        this.grade = grade;
         this.notes = notes;
-        this.done = done;
+        this.period = period;
     }
 
     public int getId() {
@@ -51,36 +48,28 @@ public class Course {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public int getEcts() {
+        return ects;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEcts(int ects) {
+        this.ects = ects;
     }
 
-    public int getStartStudyYear() {
-        return startStudyYear;
+    public double getGrade() {
+        return grade;
     }
 
-    public void setStartStudyYear(int startStudyYear) {
-        this.startStudyYear = startStudyYear;
-    }
-
-    public int getECs() {
-        return ECs;
-    }
-
-    public void setECs(int ECs) {
-        this.ECs = ECs;
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 
     public String getNotes() {
@@ -91,11 +80,11 @@ public class Course {
         this.notes = notes;
     }
 
-    public boolean isDone() {
-        return done;
+    public int getPeriod() {
+        return period;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setPeriod(int period) {
+        this.period = period;
     }
 }

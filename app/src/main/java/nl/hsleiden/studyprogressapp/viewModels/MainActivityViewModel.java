@@ -36,23 +36,9 @@ public class MainActivityViewModel extends ViewModel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                courseRepository.insertCourse(
-                        new Course(
-                                "IOPR2",
-                                "Programming",
-                                2015,
-                                3,
-                                "aantekeningen",
-                                false));
-
-                courseRepository.insertCourse(
-                        new Course(
-                                "INET",
-                                "Programming",
-                                2015,
-                                3,
-                                "aantekeningen",
-                                true));
+//                courseRepository.insertCourse(new Course("IOPR1",3,7.5,"Programmeren",1));
+                courseRepository.insertCourse(new Course("INET",3,1,"Netwerken",2));
+                courseRepository.insertCourse(new Course("SLB",3,1,"Begeleiding",4));
             }
         }).start();
     }

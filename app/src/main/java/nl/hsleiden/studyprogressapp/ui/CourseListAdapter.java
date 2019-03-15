@@ -1,12 +1,10 @@
 package nl.hsleiden.studyprogressapp.ui;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,10 +15,9 @@ import nl.hsleiden.studyprogressapp.database.Models.Course;
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.MyViewHolder> {
 
     private List<Course> courseList;
-    private final Context context;
 
-    public CourseListAdapter(Context context) {
-        this.context = context;
+    public CourseListAdapter(List<Course> courseList) {
+        this.courseList = courseList;
     }
 
     public void setCourses(List<Course> courses) {
@@ -31,7 +28,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View listItem = LayoutInflater.from(context).inflate(R.layout.course_list_item, viewGroup, false);
+        View listItem = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_list_item, viewGroup, false);
 
         MyViewHolder myViewHolder = new MyViewHolder(listItem);
         return myViewHolder;
@@ -49,19 +46,20 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
         }
 
         public void setData(Course course) {
 
-            TextView title = (TextView) itemView.findViewById(R.id.course_list_item_title);
-            TextView ec = (TextView) itemView.findViewById(R.id.course_list_item_ec);
-            CheckBox done = (CheckBox) itemView.findViewById(R.id.course_list_item_done);
+            TextView name = (TextView) itemView.findViewById(R.id.course_list_item_name);
+            TextView ects = (TextView) itemView.findViewById(R.id.course_ects);
+            TextView grade = (TextView) itemView.findViewById(R.id.course_grade);
 
-            title.setText(course.getTitle());
-            ec.setText(String.valueOf(course.getECs()));
-            done.setChecked(course.isDone());
+            name.setText(course.getName());
+            ects.setText(String.valueOf(course.getEcts()));
+            grade.setText(String.valueOf(course.getGrade()));
         }
     }
 }
