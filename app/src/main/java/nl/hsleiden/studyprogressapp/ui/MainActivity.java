@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.databinding.ActivityMainBinding;
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         MainActivityViewModel viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainActivityViewModel.class);
+
+        mainBinding.btnGetDataFromWebservice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.resetCoursesFromWebservice();
+            }
+        });
 
         CourseListAdapter courseListAdapter = new CourseListAdapter(viewModel.getAllCourses().getValue());
         mainBinding.recycleViewCourseList.setAdapter(courseListAdapter);

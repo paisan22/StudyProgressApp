@@ -30,21 +30,31 @@ android {
 }
 
 dependencies {
+
+    // Retrofit for performing http requests
+    def retrofit_version = "2.5.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // recycler view
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
-
+    // ??
     def lifecyle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecyle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$lifecyle_version"
 
+    // Dependency injection
     def dagger_version = "2.21"
     implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
+    // Room sql wrapper
     def room_version = "1.1.1"
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
+    // Default dependencies
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
