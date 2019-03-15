@@ -4,4 +4,6 @@
     <string name="course_subject">subject name</string>
     <string name="course_ects">3</string>
     <string name="course_grade">0</string>
+    <string name="menu_action_home">Home</string>
+    <string name="menu_action_progressie_ects">Progressie ects</string>
 </resources>
