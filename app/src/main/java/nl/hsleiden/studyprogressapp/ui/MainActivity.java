@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         //toolbar setup
         setSupportActionBar(mainBinding.toolbar);
 
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         viewModelFactory = new MainActivityViewModelFactory(this);

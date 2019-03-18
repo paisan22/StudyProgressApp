@@ -1,5 +1,6 @@
 package nl.hsleiden.studyprogressapp.ui;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,7 +31,9 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View listItem = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_list_item, viewGroup, false);
 
+
         MyViewHolder myViewHolder = new MyViewHolder(listItem);
+
         return myViewHolder;
     }
 
@@ -52,6 +55,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
         }
 
         public void setData(Course course) {
+
+            if (course.getGrade() < 5.5) {
+                itemView.setBackgroundColor(Color.RED);
+            } else {
+                itemView.setBackgroundColor(Color.GREEN);
+            }
 
             TextView name = (TextView) itemView.findViewById(R.id.course_list_item_name);
             TextView ects = (TextView) itemView.findViewById(R.id.course_ects);
