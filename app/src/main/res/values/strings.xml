@@ -7,4 +7,9 @@
     <string name="menu_action_home">Home</string>
     <string name="menu_action_progressie_ects">Progressie ects</string>
     <string name="btn_reset_courses">Reset courses</string>
+    <string name="subject_name">Naam</string>
+    <string name="subject_ects">ECTS</string>
+    <string name="subject_grade">Cijfer</string>
+    <string name="subject_period">Periode</string>
+    <string name="subject_notes">Notities</string>
 </resources>

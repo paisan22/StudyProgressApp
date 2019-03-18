@@ -4,8 +4,12 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
+// TODO: make it parcelable for better performance.
+
 @Entity(tableName = "course")
-public class Course {
+public class Course implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;

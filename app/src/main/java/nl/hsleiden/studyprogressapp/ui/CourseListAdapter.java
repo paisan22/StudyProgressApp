@@ -1,5 +1,6 @@
 package nl.hsleiden.studyprogressapp.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -30,8 +31,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View listItem = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_list_item, viewGroup, false);
-
-
         MyViewHolder myViewHolder = new MyViewHolder(listItem);
 
         return myViewHolder;
@@ -41,6 +40,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         Course course = courseList.get(i);
         myViewHolder.setData(course);
+
     }
 
     @Override
@@ -69,6 +69,15 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
             name.setText(course.getName());
             ects.setText(String.valueOf(course.getEcts()));
             grade.setText(String.valueOf(course.getGrade()));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), SubjectDetailsActivity.class);
+                    intent.putExtra("course", course);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
