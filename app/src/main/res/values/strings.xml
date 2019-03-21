@@ -12,4 +12,6 @@
     <string name="subject_grade">Cijfer</string>
     <string name="subject_period">Periode</string>
     <string name="subject_notes">Notities</string>
+    <string name="btn_save_course">Opslaan</string>
+    <string name="null_notes">Nog geen notities...</string>
 </resources>

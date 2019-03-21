@@ -3,19 +3,24 @@ package nl.hsleiden.studyprogressapp.database.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
 import java.io.Serializable;
+
+import nl.hsleiden.studyprogressapp.BR;
 
 // TODO: make it parcelable for better performance.
 
 @Entity(tableName = "course")
-public class Course implements Serializable {
+public class Course extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String name;
     private int ects;
+
     private double grade;
     private String notes;
     private int period;
@@ -56,6 +61,7 @@ public class Course implements Serializable {
         return name;
     }
 
+    @Bindable
     public void setName(String name) {
         this.name = name;
     }
@@ -72,14 +78,17 @@ public class Course implements Serializable {
         return grade;
     }
 
+    @Bindable
     public void setGrade(double grade) {
         this.grade = grade;
+        notifyPropertyChanged(BR.grade);
     }
 
     public String getNotes() {
         return notes;
     }
 
+    @Bindable
     public void setNotes(String notes) {
         this.notes = notes;
     }
@@ -88,6 +97,7 @@ public class Course implements Serializable {
         return period;
     }
 
+    @Bindable
     public void setPeriod(int period) {
         this.period = period;
     }

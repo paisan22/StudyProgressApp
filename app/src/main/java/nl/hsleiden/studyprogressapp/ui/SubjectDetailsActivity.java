@@ -20,6 +20,7 @@ import nl.hsleiden.studyprogressapp.viewModels.SubjectDetailsActivityViewModelFa
 public class SubjectDetailsActivity extends AppCompatActivity {
 
     private SubjectDetailsActivityViewModelFactory viewModelFactory;
+
     private static final String TAG = "SubjectDetailsActivity";
 
     @Override
@@ -32,12 +33,38 @@ public class SubjectDetailsActivity extends AppCompatActivity {
 
         setSupportActionBar(detailsBinding.subjectDetailsToolbar);
 
-        viewModelFactory = new SubjectDetailsActivityViewModelFactory(this, (Course) getIntent().getSerializableExtra("course"));
+        viewModelFactory = new SubjectDetailsActivityViewModelFactory(
+                this,
+                (Course) getIntent().getSerializableExtra("course"));
+
         SubjectDetailsActivityViewModel viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(SubjectDetailsActivityViewModel.class);
 
         Course course = viewModel.getCourse();
+        setView(course, detailsBinding);
+
+
+
+
+        detailsBinding.btnSaveDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: bind the whole Course object
+                Editable gradeValueText = detailsBinding.subjectDetailsGradeValue.getText();
+                Editable notesValueText = detailsBinding.subjectDetailsNotesValue.getText();
+
+                double grade = Double.parseDouble(gradeValueText.toString());
+                String notes = notesValueText.toString();
+
+                course.setGrade(grade);
+                course.setNotes(notes);
+                viewModel.updateCourse(course, v.getContext());
+            }
+        });
+    }
+
+    private void setView(Course course, ActivitySubjectDetailsBinding detailsBinding) {
 
         detailsBinding.subjectDetailsNameValue.setText(course.getName());
         detailsBinding.subjectDetailsEctsValue.setText(String.valueOf(course.getEcts()));
@@ -47,18 +74,8 @@ public class SubjectDetailsActivity extends AppCompatActivity {
         if(course.getNotes() != null) {
             detailsBinding.subjectDetailsNotesValue.setText(course.getNotes());
         } else {
-            detailsBinding.subjectDetailsNotesValue.setText("Nog geen notities...");
+            detailsBinding.subjectDetailsNotesValue.setText(getString(R.string.null_notes));
         }
-
-        detailsBinding.btnSaveDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Editable gradeValueText = detailsBinding.subjectDetailsGradeValue.getText();
-                double aDouble = Double.parseDouble(gradeValueText.toString());
-                course.setGrade(aDouble);
-                viewModel.updateCourse(course, v.getContext());
-            }
-        });
     }
 
     @Override
