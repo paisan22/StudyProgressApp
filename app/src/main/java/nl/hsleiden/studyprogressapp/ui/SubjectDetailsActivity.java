@@ -53,12 +53,14 @@ public class SubjectDetailsActivity extends AppCompatActivity {
                 // TODO: bind the whole Course object
                 Editable gradeValueText = detailsBinding.subjectDetailsGradeValue.getText();
                 Editable notesValueText = detailsBinding.subjectDetailsNotesValue.getText();
+                boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
 
                 double grade = Double.parseDouble(gradeValueText.toString());
                 String notes = notesValueText.toString();
 
                 course.setGrade(grade);
                 course.setNotes(notes);
+                course.setRequired(required);
                 viewModel.updateCourse(course, v.getContext());
             }
         });
@@ -76,6 +78,7 @@ public class SubjectDetailsActivity extends AppCompatActivity {
         } else {
             detailsBinding.subjectDetailsNotesValue.setText(getString(R.string.null_notes));
         }
+        detailsBinding.subjectDetailsRequiredValue.setChecked(course.isRequired());
     }
 
     @Override

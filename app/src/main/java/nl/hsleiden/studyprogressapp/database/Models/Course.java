@@ -3,17 +3,13 @@ package nl.hsleiden.studyprogressapp.database.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
 import java.io.Serializable;
-
-import nl.hsleiden.studyprogressapp.BR;
 
 // TODO: make it parcelable for better performance.
 
 @Entity(tableName = "course")
-public class Course extends BaseObservable implements Serializable {
+public class Course implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -24,6 +20,7 @@ public class Course extends BaseObservable implements Serializable {
     private double grade;
     private String notes;
     private int period;
+    private boolean required;
 
     /**
      * Wordt gebruikt door Room.
@@ -61,7 +58,6 @@ public class Course extends BaseObservable implements Serializable {
         return name;
     }
 
-    @Bindable
     public void setName(String name) {
         this.name = name;
     }
@@ -78,17 +74,14 @@ public class Course extends BaseObservable implements Serializable {
         return grade;
     }
 
-    @Bindable
     public void setGrade(double grade) {
         this.grade = grade;
-        notifyPropertyChanged(BR.grade);
     }
 
     public String getNotes() {
         return notes;
     }
 
-    @Bindable
     public void setNotes(String notes) {
         this.notes = notes;
     }
@@ -97,8 +90,15 @@ public class Course extends BaseObservable implements Serializable {
         return period;
     }
 
-    @Bindable
     public void setPeriod(int period) {
         this.period = period;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 }
