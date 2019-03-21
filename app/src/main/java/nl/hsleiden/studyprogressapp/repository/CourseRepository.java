@@ -56,4 +56,13 @@ public class CourseRepository {
     public void insertCourse(Course course) {
         courseDAO.insertCourse(course);
     }
+
+    public void updateCourse(Course course) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                courseDAO.updateCourse(course);
+            }
+        }).start();
+    }
 }

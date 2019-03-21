@@ -75,11 +75,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/subject_grade" />
 
-                <TextView
+                <EditText
                     android:id="@+id/subject_details_grade_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:inputType="numberDecimal"/>
             </TableRow>
 
             <TableRow
@@ -125,6 +126,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subject_details_notes" />
+
+        <Button
+            android:id="@+id/btn_save_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Opslaan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subject_details_notes_value" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

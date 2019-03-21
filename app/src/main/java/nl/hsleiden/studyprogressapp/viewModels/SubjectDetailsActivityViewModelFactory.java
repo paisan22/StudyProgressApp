@@ -1,32 +1,29 @@
 package nl.hsleiden.studyprogressapp.viewModels;
 
-
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import nl.hsleiden.studyprogressapp.database.Models.Course;
 import nl.hsleiden.studyprogressapp.repository.CourseRepository;
 
-/**
- * Zorgt ervoor dat de CourseRepository meegegeven kan worden. Dit heb je dus niet nodig wanneer je
- * een no-arguments viewModel hebt.
- */
-public class MainActivityViewModelFactory implements ViewModelProvider.Factory {
+public class SubjectDetailsActivityViewModelFactory implements ViewModelProvider.Factory {
 
     private CourseRepository courseRepository;
+    private Course course;
 
-    public MainActivityViewModelFactory(Context context) {
-        courseRepository = new CourseRepository(context);
+    public SubjectDetailsActivityViewModelFactory(Context context, Course course) {
+        this.courseRepository = new CourseRepository(context);
+        this.course = course;
     }
 
     @NonNull
     @Override
     @SuppressWarnings(value = "unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-
-        if(modelClass.isAssignableFrom(MainActivityViewModel.class)) {
-            return (T) new MainActivityViewModel(courseRepository);
+        if(modelClass.isAssignableFrom(SubjectDetailsActivityViewModel.class)) {
+            return (T) new SubjectDetailsActivityViewModel(courseRepository, course);
         } else {
             throw new IllegalArgumentException("Unknown class");
         }
