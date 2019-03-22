@@ -3,10 +3,10 @@ package nl.hsleiden.studyprogressapp.menu;
 import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.ui.MainActivity;
+import nl.hsleiden.studyprogressapp.ui.ProgressActivity;
 
 public class MenuHandler {
 
@@ -18,8 +18,7 @@ public class MenuHandler {
                 break;
             }
             case R.id.menu_progress_ects: {
-//                context.startActivity(new Intent(context,MainActivity.class));
-                Toast.makeText(context,"Progression!", Toast.LENGTH_LONG).show();
+                context.startActivity(new Intent(context, ProgressActivity.class));
                 break;
             }
         }

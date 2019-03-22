@@ -26,7 +26,7 @@ public class SubjectDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject_details);
+//        setContentView(R.layout.activity_subject_details);
 
         ActivitySubjectDetailsBinding detailsBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_subject_details);
@@ -43,9 +43,6 @@ public class SubjectDetailsActivity extends AppCompatActivity {
 
         Course course = viewModel.getCourse();
         setView(course, detailsBinding);
-
-
-
 
         detailsBinding.btnSaveDetails.setOnClickListener(new View.OnClickListener() {
             @Override

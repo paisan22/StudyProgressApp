@@ -31,6 +31,9 @@ android {
 
 dependencies {
 
+    // MPAndroidChart for visualization the study progress
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     // Retrofit for performing http requests
     def retrofit_version = "2.5.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
