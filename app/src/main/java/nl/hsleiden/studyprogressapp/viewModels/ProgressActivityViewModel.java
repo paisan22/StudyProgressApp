@@ -19,6 +19,7 @@ public class ProgressActivityViewModel extends ViewModel {
 
     private int current_ECTS_total = 0;
     private int current_ECTS = 0;
+    private int remaining_ECTS = 0;
 
 
     public ProgressActivityViewModel(CourseRepository courseRepository) {
@@ -39,6 +40,7 @@ public class ProgressActivityViewModel extends ViewModel {
 
     public void setCurrent_ECTS(int progress) {
         this.current_ECTS = progress;
+        this.remaining_ECTS = MAX_ECTS - current_ECTS;
     }
 
     public LiveData<List<Course>> getCourses() {
@@ -55,5 +57,13 @@ public class ProgressActivityViewModel extends ViewModel {
                 .filter(c -> c.getGrade() >= this.MIN_GRADE)
                 .mapToInt(Course::getEcts)
                 .sum();
+    }
+
+    public void setRemaining_ECTS() {
+        this.remaining_ECTS = MAX_ECTS - current_ECTS;
+    }
+
+    public int getRemaining_ECTS() {
+        return remaining_ECTS;
     }
 }

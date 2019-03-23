@@ -52,5 +52,25 @@
             app:layout_constraintStart_toEndOf="@+id/current_ects_value"
             app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
+        <TextView
+            android:id="@+id/remaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/remaining_ects"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current_ects_value" />
+
+        <TextView
+            android:id="@+id/remaining_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/remaining"
+            app:layout_constraintTop_toBottomOf="@+id/max_ects_value" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -71,6 +71,14 @@ public class ProgressActivity extends AppCompatActivity {
                         }
                     });
 
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewModel.setRemaining_ECTS();
+                            progressBinding.remainingValue.setText(String.valueOf(viewModel.getRemaining_ECTS()));
+                        }
+                    });
+
                     try {
                         Thread.sleep(20);
                     } catch (InterruptedException e) {

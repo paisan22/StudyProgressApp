@@ -5,7 +5,7 @@
     <string name="course_ects">3</string>
     <string name="course_grade">0</string>
     <string name="menu_action_home">Home</string>
-    <string name="menu_action_progressie_ects">Progressie ects</string>
+    <string name="menu_action_progressie_ects">Progressie</string>
     <string name="btn_reset_courses">Reset courses</string>
     <string name="subject_name">Naam</string>
     <string name="subject_ects">ECTS</string>
@@ -15,4 +15,5 @@
     <string name="btn_save_course">Opslaan</string>
     <string name="null_notes">Nog geen notities...</string>
     <string name="subject_details_required">Verplicht</string>
+    <string name="remaining_ects">Nog te behalen ects:</string>
 </resources>
