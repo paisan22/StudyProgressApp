@@ -26,7 +26,6 @@ public class SubjectDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_subject_details);
 
         ActivitySubjectDetailsBinding detailsBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_subject_details);
@@ -51,10 +50,12 @@ public class SubjectDetailsActivity extends AppCompatActivity {
                 Editable gradeValueText = detailsBinding.subjectDetailsGradeValue.getText();
                 Editable notesValueText = detailsBinding.subjectDetailsNotesValue.getText();
                 boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
+                int studyYearValueText = Integer.parseInt(detailsBinding.subjectDetailsStudyYearValue.getText().toString());
 
                 double grade = Double.parseDouble(gradeValueText.toString());
                 String notes = notesValueText.toString();
 
+                course.setStudyYear(studyYearValueText);
                 course.setGrade(grade);
                 course.setNotes(notes);
                 course.setRequired(required);
@@ -69,6 +70,7 @@ public class SubjectDetailsActivity extends AppCompatActivity {
         detailsBinding.subjectDetailsEctsValue.setText(String.valueOf(course.getEcts()));
         detailsBinding.subjectDetailsGradeValue.setText(String.valueOf(course.getGrade()));
         detailsBinding.subjectDetailsPeriodValue.setText(String.valueOf(course.getPeriod()));
+        detailsBinding.subjectDetailsStudyYearValue.setText(String.valueOf(course.getStudyYear()));
 
         if(course.getNotes() != null) {
             detailsBinding.subjectDetailsNotesValue.setText(course.getNotes());
