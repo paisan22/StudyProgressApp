@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/empty_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/empty_view"
             app:layout_constraintStart_toEndOf="@+id/current_ects_value"
             app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/empty_view"
             app:layout_constraintStart_toEndOf="@+id/remaining"
             app:layout_constraintTop_toBottomOf="@+id/max_ects_value" />
 

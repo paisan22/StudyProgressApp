@@ -7,23 +7,70 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.database.Models.Course;
 
-public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.MyViewHolder> {
+public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.MyViewHolder> implements Filterable {
 
     private List<Course> courseList;
+    private List<Course> courseListFull;
 
-    public CourseListAdapter(List<Course> courseList) {
-        this.courseList = courseList;
+
+    public CourseListAdapter() {
     }
+
+    @Override
+    public Filter getFilter() {
+        return courseFilter;
+    }
+
+    // wordt op een background thread uitgevoerd zodat de UI niet freezed
+    private Filter courseFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Course> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(courseListFull);
+            } else {
+                int pattern = Integer.parseInt(constraint.toString());
+
+                filteredList.addAll(
+                        courseListFull
+                                .stream()
+                                .filter(course -> course.getStudyYear() == pattern)
+                                .collect(Collectors.toList()));
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            courseList.clear();
+            try {
+                courseList.addAll((List) results.values);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+                courseList.addAll(courseListFull);
+            }
+
+            notifyDataSetChanged();
+        }
+    };
 
     public void setCourses(List<Course> courses) {
         this.courseList = courses;
+        this.courseListFull = new ArrayList<>(courses);
         notifyDataSetChanged();
     }
 
@@ -65,10 +112,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
             TextView name = (TextView) itemView.findViewById(R.id.course_list_item_name);
             TextView ects = (TextView) itemView.findViewById(R.id.course_ects);
             TextView grade = (TextView) itemView.findViewById(R.id.course_grade);
+            TextView studyYear = (TextView) itemView.findViewById(R.id.course_study_year);
 
             name.setText(course.getName());
             ects.setText(String.valueOf(course.getEcts()));
             grade.setText(String.valueOf(course.getGrade()));
+            studyYear.setText(String.valueOf(course.getStudyYear()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

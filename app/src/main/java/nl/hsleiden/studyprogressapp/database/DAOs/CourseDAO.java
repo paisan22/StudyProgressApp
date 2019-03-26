@@ -31,4 +31,7 @@ public interface CourseDAO {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateCourse(Course course);
+
+    @Query("SELECT * FROM course WHERE studyYear = :studyYear")
+    public abstract LiveData<List<Course>> getAllCoursesByStudyYear(int studyYear);
 }

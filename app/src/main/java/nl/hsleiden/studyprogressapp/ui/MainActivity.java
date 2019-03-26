@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.databinding.ActivityMainBinding;
@@ -46,21 +47,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        CourseListAdapter courseListAdapter = new CourseListAdapter(viewModel.getAllCourses().getValue());
+        CourseListAdapter courseListAdapter = new CourseListAdapter();
+
         mainBinding.recycleViewCourseList.setAdapter(courseListAdapter);
         mainBinding.recycleViewCourseList.setHasFixedSize(true);
         mainBinding.recycleViewCourseList.setLayoutManager(linearLayoutManager);
 
-        viewModel.getAllCourses().observe(this, list ->{
-            courseListAdapter.setCourses(list);
+        viewModel.getAllCourses().observe(this, courses -> {
+            courseListAdapter.setCourses(courses);
         });
+
+        // searchView setup
+        mainBinding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                courseListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        mainBinding.searchBar.setQueryHint(getString(R.string.searchView_placeholder));
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.my_menu, menu);
-        return  true;
+
+        return true;
     }
 
     @Override

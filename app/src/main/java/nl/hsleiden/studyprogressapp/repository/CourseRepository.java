@@ -20,6 +20,7 @@ import nl.hsleiden.studyprogressapp.database.Models.Course;
 public class CourseRepository {
 
     private String DB_NAME = "course_db";
+
     private CourseDAO courseDAO;
 
     public CourseRepository(Context context) {
@@ -41,6 +42,10 @@ public class CourseRepository {
 
     public LiveData<List<Course>> getAllCourses() {
         return this.courseDAO.getAllCourses();
+    }
+
+    public LiveData<List<Course>> getAllCoursesByStudyYear(int studyYear) {
+        return this.courseDAO.getAllCoursesByStudyYear(studyYear);
     }
 
     public void insertAllCourses(List<Course> courses) {

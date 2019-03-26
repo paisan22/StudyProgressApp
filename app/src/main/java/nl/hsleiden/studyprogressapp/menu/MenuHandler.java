@@ -13,10 +13,11 @@ public class MenuHandler {
     public static void handle (Context context, MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
-            case R.id.menu_home: {
-                context.startActivity(new Intent(context,MainActivity.class));
+            case R.id.menu_courses: {
+                context.startActivity(new Intent(context, MainActivity.class));
                 break;
             }
+
             case R.id.menu_progress_ects: {
                 context.startActivity(new Intent(context, ProgressActivity.class));
                 break;
