@@ -114,6 +114,14 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
             TextView grade = (TextView) itemView.findViewById(R.id.course_grade);
             TextView studyYear = (TextView) itemView.findViewById(R.id.course_study_year);
 
+            TextView required = (TextView) itemView.findViewById(R.id.course_required);
+            if(course.isRequired()) {
+                required.setText("V");
+            } else {
+                required.setText("K");
+            }
+
+
             name.setText(course.getName());
             ects.setText(String.valueOf(course.getEcts()));
             grade.setText(String.valueOf(course.getGrade()));
