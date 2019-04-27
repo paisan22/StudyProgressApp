@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.SearchView;
 
 import nl.hsleiden.studyprogressapp.R;
@@ -40,12 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 .of(this, viewModelFactory)
                 .get(MainActivityViewModel.class);
 
-        mainBinding.btnGetDataFromWebservice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.resetCoursesFromWebservice();
-            }
-        });
+        String reset = getIntent().getStringExtra("reset");
+
+        if(reset != null && reset.equals("yes")) {
+            viewModel.resetCoursesFromWebservice();
+        }
 
         CourseListAdapter courseListAdapter = new CourseListAdapter();
 

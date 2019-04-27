@@ -12,6 +12,7 @@
     <string name="subject_grade">Cijfer</string>
     <string name="subject_period">Periode</string>
     <string name="subject_notes">Notities</string>
+    <string name="subject_year">Jaar</string>
     <string name="btn_save_course">Opslaan</string>
     <string name="null_notes">Nog geen notities...</string>
     <string name="subject_details_required">Verplicht</string>
@@ -21,5 +22,5 @@
     <string name="courses_menu">Vakken overzicht</string>
     <string name="searchView_placeholder">Zoek op basis van studiejaar</string>
     <string name="course_required">V</string>
-    <string name="study_year_example">2015</string>
+    <string name="menu_action_reset_courses">Reset vakken</string>
 </resources>

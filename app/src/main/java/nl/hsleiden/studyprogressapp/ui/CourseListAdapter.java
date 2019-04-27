@@ -1,7 +1,6 @@
 package nl.hsleiden.studyprogressapp.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -104,9 +103,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
         public void setData(Course course) {
 
             if (course.getGrade() < 5.5) {
-                itemView.setBackgroundColor(Color.RED);
-            } else {
-                itemView.setBackgroundColor(Color.GREEN);
+                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_warning));
             }
 
             TextView name = (TextView) itemView.findViewById(R.id.course_list_item_name);

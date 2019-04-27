@@ -91,7 +91,7 @@
                     android:id="@+id/subject_details_study_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/subject_grade" />
+                    android:text="@string/subject_year" />
 
                 <EditText
                     android:id="@+id/subject_details_study_year_value"

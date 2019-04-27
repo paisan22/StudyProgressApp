@@ -22,6 +22,14 @@ public class MenuHandler {
                 context.startActivity(new Intent(context, ProgressActivity.class));
                 break;
             }
+
+            case R.id.menu_reset_courses: {
+                Intent intent = new Intent();
+                intent.setClass(context, MainActivity.class);
+                intent.putExtra("reset", "yes");
+                context.startActivity(intent);
+                break;
+            }
         }
     }
 }
