@@ -106,23 +106,23 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
                 itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_warning));
             }
 
-            TextView name = (TextView) itemView.findViewById(R.id.course_list_item_name);
-            TextView ects = (TextView) itemView.findViewById(R.id.course_ects);
-            TextView grade = (TextView) itemView.findViewById(R.id.course_grade);
-            TextView studyYear = (TextView) itemView.findViewById(R.id.course_study_year);
+            TextView name = (TextView) itemView.findViewById(R.id.subject_list_item_name);
+//            TextView ects = (TextView) itemView.findViewById(R.id.list_);
+            TextView grade = (TextView) itemView.findViewById(R.id.subject_list_item_grade);
+            TextView studyYear = (TextView) itemView.findViewById(R.id.subject_list_item_year);
 
-            TextView required = (TextView) itemView.findViewById(R.id.course_required);
+            TextView required = (TextView) itemView.findViewById(R.id.subject_list_item_required);
             if(course.isRequired()) {
-                required.setText("V");
+                required.setText("Verplicht: Ja");
             } else {
-                required.setText("K");
+                required.setText("Verplicht: Nee");
             }
 
 
             name.setText(course.getName());
-            ects.setText(String.valueOf(course.getEcts()));
-            grade.setText(String.valueOf(course.getGrade()));
-            studyYear.setText(String.valueOf(course.getStudyYear()));
+//            ects.setText(String.valueOf(course.getEcts()));
+            grade.setText("Cijfer: " + String.valueOf(course.getGrade()));
+            studyYear.setText("Jaar: " + String.valueOf(course.getStudyYear()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

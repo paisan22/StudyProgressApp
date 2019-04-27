@@ -21,6 +21,6 @@
     <string name="menu_action_overview_2014">2014</string>
     <string name="courses_menu">Vakken overzicht</string>
     <string name="searchView_placeholder">Zoek op basis van studiejaar</string>
-    <string name="course_required">V</string>
     <string name="menu_action_reset_courses">Reset vakken</string>
+    <string name="subject_required">verplicht</string>
 </resources>
