@@ -23,4 +23,11 @@
     <string name="searchView_placeholder">Zoek op basis van studiejaar</string>
     <string name="menu_action_reset_courses">Reset vakken</string>
     <string name="subject_required">verplicht</string>
+    <string name="hint_subject_name">Vak naam</string>
+    <string name="hint_ects">Aantal ects</string>
+    <string name="hint_grade">Cijfer</string>
+    <string name="hint_study_year">Studiejaar</string>
+    <string name="hint_period">Periode</string>
+    <string name="hint_required">Verplicht</string>
+    <string name="hint_notes">Aantekeningen</string>
 </resources>

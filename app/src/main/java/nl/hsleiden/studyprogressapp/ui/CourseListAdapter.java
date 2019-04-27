@@ -2,6 +2,7 @@ package nl.hsleiden.studyprogressapp.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.card.MaterialCardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,11 +104,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
         public void setData(Course course) {
 
             if (course.getGrade() < 5.5) {
-                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_warning));
+                MaterialCardView cardView;
+                cardView = (MaterialCardView) itemView;
+                cardView.setCardBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_warning));
             }
 
             TextView name = (TextView) itemView.findViewById(R.id.subject_list_item_name);
-//            TextView ects = (TextView) itemView.findViewById(R.id.list_);
             TextView grade = (TextView) itemView.findViewById(R.id.subject_list_item_grade);
             TextView studyYear = (TextView) itemView.findViewById(R.id.subject_list_item_year);
 
@@ -120,7 +122,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
 
 
             name.setText(course.getName());
-//            ects.setText(String.valueOf(course.getEcts()));
             grade.setText("Cijfer: " + String.valueOf(course.getGrade()));
             studyYear.setText("Jaar: " + String.valueOf(course.getStudyYear()));
 
