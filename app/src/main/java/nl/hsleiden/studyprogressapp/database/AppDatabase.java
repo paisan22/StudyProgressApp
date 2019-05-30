@@ -16,5 +16,5 @@ import nl.hsleiden.studyprogressapp.database.Models.Course;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract CourseDAO getCourseDAO();
-
 }
+

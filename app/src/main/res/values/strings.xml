@@ -30,4 +30,5 @@
     <string name="hint_period">Periode</string>
     <string name="hint_required">Verplicht</string>
     <string name="hint_notes">Aantekeningen</string>
+    <string name="grades_overview">Cijfers overzicht</string>
 </resources>

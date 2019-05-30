@@ -13,6 +13,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_barchart_grades"
+        android:title="@string/grades_overview"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_reset_courses"
         android:title="@string/menu_action_reset_courses"
         app:showAsAction="never" />

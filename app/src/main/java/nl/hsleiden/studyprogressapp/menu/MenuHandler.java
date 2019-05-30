@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import nl.hsleiden.studyprogressapp.R;
+import nl.hsleiden.studyprogressapp.ui.GradeBarChartActivity;
 import nl.hsleiden.studyprogressapp.ui.MainActivity;
 import nl.hsleiden.studyprogressapp.ui.ProgressActivity;
 
@@ -29,6 +30,10 @@ public class MenuHandler {
                 intent.putExtra("reset", "yes");
                 context.startActivity(intent);
                 break;
+            }
+
+            case R.id.menu_barchart_grades: {
+                context.startActivity(new Intent(context, GradeBarChartActivity.class));
             }
         }
     }
