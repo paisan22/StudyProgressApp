@@ -57,55 +57,30 @@ public class GradeBarChartActivity extends AppCompatActivity {
     }
 
     private void setData(List<Course> list) {
-        // pak alle mogelijke studiejaren
-        List<Integer> studyYears = new ArrayList<>();
-        for(Course course:list) {
-            if(!studyYears.contains(course.getStudyYear())) {
-                studyYears.add(course.getStudyYear());
-            }
-        }
 
-        // tel ects op per jaar
-        ArrayList<TotalECTSPerYear> totalECTSPerYears = new ArrayList<>();
+        // get all possible years
+        List<Integer> studyYears = getPossibleYears(list);
 
-        for(int year: studyYears) {
-            int ects = 0;
-            for (Course course: list) {
+        // count ects per year
+        ArrayList<TotalECTSPerYear> totalECTSPerYears = getECTSPerYear(list, studyYears);
 
-                if((course.getStudyYear() == year) && (course.getGrade() >= 5.5)) {
-                    ects += course.getEcts();
-                }
-            }
-            totalECTSPerYears.add(new TotalECTSPerYear(year, ects));
-        }
+        // make bar-entries based on years and put in the ects
+        List<BarEntry> barEntries = createBarEntries(totalECTSPerYears);
 
-        // maak barEntries op basis van studiejaar
-        // eigen data in arraylist met entry objecten zetten
-        List<BarEntry> barEntries = new ArrayList<>();
-
-        for(int i = 0;i < totalECTSPerYears.size();i++) {
-            barEntries.add(new BarEntry(i, totalECTSPerYears.get(i).ects));
-        }
-
-        // de list met entries toevoegen aan de dataset. deze houd de data vast die bij elkaar hoort.
+        // adding bar-entries to the data-set
         BarDataSet barDataSet = new BarDataSet(barEntries, "Aantal ECTS per jaar");
 
-        ValueFormatter valueFormatter = new ValueFormatter() {
-            @Override
-            public String getAxisLabel(float value, AxisBase axis) {
-                return studyYears.get((int) value).toString();
-            }
-        };
-
+        // creating a valueFormatter for setting the year-labels on the axis
+        ValueFormatter valueFormatter = getXLabels(studyYears);
         XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1F);
         xAxis.setValueFormatter(valueFormatter);
 
-        // de datasets moeten toegevoegd worden aan het data-object. deze bevat alle data voor de chart.
+        // adding the data-set to the BarData which holds al the data for the chart.
         BarData barData = new BarData(barDataSet);
         barData.setBarWidth(0.9f);
 
-        // voeg de data-object toe aan de chart en refresh deze met .invalidate()
+        // adding the data and some styling to the chart.
         barChart.setDrawGridBackground(false);
         barChart.setDrawBorders(false);
         barChart.setData(barData);
@@ -115,11 +90,59 @@ public class GradeBarChartActivity extends AppCompatActivity {
         description.setText("");
         barChart.setDescription(description);
 
-        // zet max-waarde Y-as
+        // set max value for the yaxis
         YAxis axisLeft = barChart.getAxisLeft();
         axisLeft.setAxisMaximum(60);
 
+        // finally refresh the bar-chart so the provided data is drawn
         barChart.invalidate();
+    }
+
+    private ValueFormatter getXLabels(List<Integer> studyYears) {
+        return new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                return studyYears.get((int) value).toString();
+            }
+        };
+    }
+
+    private List<BarEntry> createBarEntries(ArrayList<TotalECTSPerYear> totalECTSPerYears) {
+        List<BarEntry> barEntries = new ArrayList<>();
+
+        for (int i = 0; i < totalECTSPerYears.size(); i++) {
+            barEntries.add(new BarEntry(i, totalECTSPerYears.get(i).ects));
+        }
+        return barEntries;
+    }
+
+    private ArrayList<TotalECTSPerYear> getECTSPerYear(List<Course> list, List<Integer> studyYears) {
+
+        ArrayList<TotalECTSPerYear> totalECTSPerYears = new ArrayList<>();
+
+        // repeat this for each year
+        for (int year : studyYears) {
+            // sum for each subject the ects if the year is equal to the current year
+            int ects = 0;
+            for (Course course : list) {
+                if ((course.getStudyYear() == year) && (course.getGrade() >= 5.5)) {
+                    ects += course.getEcts();
+                }
+            }
+            totalECTSPerYears.add(new TotalECTSPerYear(year, ects));
+        }
+        return totalECTSPerYears;
+    }
+
+    private List<Integer> getPossibleYears(List<Course> list) {
+        List<Integer> studyYears = new ArrayList<>();
+
+        for (Course course : list) {
+            if (!studyYears.contains(course.getStudyYear())) {
+                studyYears.add(course.getStudyYear());
+            }
+        }
+        return studyYears;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Toepassing van Data binding om boilerplate code te voorkomen.
+        // Applying data-binding to prevent boilerplate code in increasing performance
         ActivityMainBinding mainBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         mainBinding.searchBar.setQueryHint(getString(R.string.searchView_placeholder));
-
     }
 
     @Override

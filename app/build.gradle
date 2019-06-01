@@ -25,8 +25,6 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-
-
 }
 
 dependencies {
@@ -42,20 +40,20 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    // recycler view
+    // Recycler view for showing items as a list
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
-    // ??
+    // Is necessary to work with lifecycle-aware components such as a ViewModel
     def lifecyle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecyle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$lifecyle_version"
 
-    // Dependency injection
+    // Dagger for using dependency injection
     def dagger_version = "2.21"
     implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
-    // Room sql wrapper
+    // Room sql wrapper for data persistence
     def room_version = "1.1.1"
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"

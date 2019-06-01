@@ -44,8 +44,6 @@ public class ProgressActivity extends AppCompatActivity {
            progressBinding.progressBar.setMax(this.viewModel.getMAX_ECTS());
            progressBinding.maxEctsValue.setText("/ " + this.viewModel.getMAX_ECTS());
 
-
-
             this.viewModel.setCurrent_ECTS(progressBinding.progressBar.getProgress());
 
             inflateProgressBar(progressBinding);
@@ -57,33 +55,31 @@ public class ProgressActivity extends AppCompatActivity {
 
         Handler handler = new Handler();
 
+        // Creates a new thread so the main-thread can continue
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (viewModel.getCurrent_ECTS() < viewModel.getCurrent_ECTS_total()) {
-                    viewModel.incrementCurrentECTS();
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBinding.progressBar.setProgress(viewModel.getCurrent_ECTS());
-                            progressBinding.currentEctsValue.setText(String.valueOf(viewModel.getCurrent_ECTS()));
-                        }
+                    // Inflate UI components with current data
+                    handler.post(() -> {
+                        progressBinding.progressBar.setProgress(viewModel.getCurrent_ECTS());
+                        progressBinding.currentEctsValue.setText(String.valueOf(viewModel.getCurrent_ECTS()));
                     });
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            viewModel.setRemaining_ECTS();
-                            progressBinding.remainingValue.setText(String.valueOf(viewModel.getRemaining_ECTS()));
-                        }
+                    handler.post(() -> {
+                        viewModel.setRemaining_ECTS();
+                        progressBinding.remainingValue.setText(String.valueOf(viewModel.getRemaining_ECTS()));
                     });
 
                     try {
+                        // This makes it looks like the progressbar will gradually filled
                         Thread.sleep(20);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    // Increment current ECTS so there is new data
+                    viewModel.incrementCurrentECTS();
                 }
             }
         }).start();

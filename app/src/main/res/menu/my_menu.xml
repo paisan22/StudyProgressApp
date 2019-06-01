@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/menu_barchart_grades"
-        android:title="@string/grades_overview"
+        android:title="@string/ects_per_year"
         app:showAsAction="never" />
 
     <item

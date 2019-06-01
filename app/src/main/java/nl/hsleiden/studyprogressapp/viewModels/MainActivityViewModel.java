@@ -43,50 +43,14 @@ public class MainActivityViewModel extends ViewModel {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
 
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful() || response.body() == null) {
                     Log.d(TAG, "onResponse: " + response.code());
+                } else {
+                    // for setting the study year for each subject.
+                    // TODO: remove for production environment
+                    List<Course> courseList = setStudyYearForEachSubject(response.body());
+                    courseRepository.insertAllCourses(courseList);
                 }
-
-                // for setting the study year for each subject.
-                // TODO: remove for production environment
-                List<Course> courseList = setStudyYearForEachSubject(response.body());
-
-                courseRepository.insertAllCourses(courseList);
-            }
-
-            /**
-             * Data seeding for setting study year, only for development purpose.
-             * @param courses
-             * @return
-             */
-            private List<Course> setStudyYearForEachSubject(List<Course> courses) {
-
-                int count = 1;
-                for (int i = 0; i < courses.size();i++) {
-                    switch (count) {
-                        case 1: {
-                            courses.get(i).setStudyYear(2014);
-                            count++;
-                            break;
-                        }
-                        case 2: {
-                            courses.get(i).setStudyYear(2015);
-                            count++;
-                            break;
-                        }
-                        case 3: {
-                            courses.get(i).setStudyYear(2016);
-                            count++;
-                            break;
-                        }
-                        case 4: {
-                            courses.get(i).setStudyYear(2017);
-                            count = 1;
-                            break;
-                        }
-                    }
-                }
-                return courses;
             }
 
             @Override
@@ -96,12 +60,44 @@ public class MainActivityViewModel extends ViewModel {
         });
     }
 
-    public LiveData<List<Course>> getAllCourses() {
+    /**
+     * Data seeding for setting study year, only for development purpose.
+     *
+     * @param courses
+     * @return
+     */
+    private List<Course> setStudyYearForEachSubject(List<Course> courses) {
+
+        int count = 1;
+        for (int i = 0; i < courses.size(); i++) {
+            switch (count) {
+                case 1: {
+                    courses.get(i).setStudyYear(2014);
+                    count++;
+                    break;
+                }
+                case 2: {
+                    courses.get(i).setStudyYear(2015);
+                    count++;
+                    break;
+                }
+                case 3: {
+                    courses.get(i).setStudyYear(2016);
+                    count++;
+                    break;
+                }
+                case 4: {
+                    courses.get(i).setStudyYear(2017);
+                    count = 1;
+                    break;
+                }
+            }
+        }
         return courses;
     }
 
-    public void insertCourse(Course course) {
-        courseRepository.insertCourse(course);
+    public LiveData<List<Course>> getAllCourses() {
+        return courses;
     }
 
     @Override
