@@ -1,6 +1,7 @@
 package nl.hsleiden.studyprogressapp.viewModels;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ public class MainActivityViewModel extends ViewModel {
 
     private CourseRepository courseRepository;
     private LiveData<List<Course>> courses;
+    private MutableLiveData<String> errorMessage;
 
     private static final String TAG = "MainActivityViewModel";
 
@@ -33,10 +35,8 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void resetCoursesFromWebservice() {
-
-        this.courseRepository.deleteAllCoures();
-
         Call<List<Course>> courseRequest = new Webservice().getCourseRequest();
+        CourseRepository courseRepository = this.courseRepository;
 
         courseRequest.enqueue(new Callback<List<Course>>() {
 
@@ -46,6 +46,7 @@ public class MainActivityViewModel extends ViewModel {
                 if (!response.isSuccessful() || response.body() == null) {
                     Log.d(TAG, "onResponse: " + response.code());
                 } else {
+                    courseRepository.deleteAllCoures();
                     // for setting the study year for each subject.
                     // TODO: remove for production environment
                     List<Course> courseList = setStudyYearForEachSubject(response.body());
@@ -56,8 +57,16 @@ public class MainActivityViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
+                errorMessage.postValue("Momenteel kunnen de vakken niet gereset worden door netwerk problemen.");
             }
         });
+    }
+
+    public LiveData<String> getErrorMessage() {
+        if (errorMessage == null) {
+            errorMessage = new MutableLiveData<>();
+        }
+        return errorMessage;
     }
 
     /**

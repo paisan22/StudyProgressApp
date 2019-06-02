@@ -4,11 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.database.Models.Course;
@@ -46,20 +48,28 @@ public class SubjectDetailsActivity extends AppCompatActivity {
         detailsBinding.btnSaveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: bind the whole Course object
-                Editable gradeValueText = detailsBinding.subjectDetailsGradeValue.getText();
-                Editable notesValueText = detailsBinding.subjectDetailsNotesValue.getText();
-                boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
-                int studyYearValueText = Integer.parseInt(detailsBinding.subjectDetailsStudyYearValue.getText().toString());
 
-                double grade = Double.parseDouble(gradeValueText.toString());
-                String notes = notesValueText.toString();
+                try {
+                    String name = Objects.requireNonNull(detailsBinding.subjectDetailsNameValue.getText()).toString();
+                    int ects = Integer.parseInt(detailsBinding.subjectDetailsEctsValue.getText().toString());
+                    double grade = Double.parseDouble(Objects.requireNonNull(detailsBinding.subjectDetailsGradeValue.getText()).toString());
+                    int studyYearValueText = Integer.parseInt(Objects.requireNonNull(detailsBinding.subjectDetailsStudyYearValue.getText()).toString());
+                    int period = Integer.parseInt(detailsBinding.subjectDetailsPeriodValue.getText().toString());
+                    String notes = Objects.requireNonNull(detailsBinding.subjectDetailsNotesValue.getText()).toString();
+                    boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
 
-                course.setStudyYear(studyYearValueText);
-                course.setGrade(grade);
-                course.setNotes(notes);
-                course.setRequired(required);
-                viewModel.updateCourse(course, v.getContext());
+                    course.setName(name);
+                    course.setEcts(ects);
+                    course.setGrade(grade);
+                    course.setStudyYear(studyYearValueText);
+                    course.setPeriod(period);
+                    course.setNotes(notes);
+                    course.setRequired(required);
+
+                    viewModel.updateCourse(course, v.getContext());
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "De wijzigingen zijn niet gelukt door onjuiste invoer.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

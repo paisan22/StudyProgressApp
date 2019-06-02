@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import nl.hsleiden.studyprogressapp.R;
 import nl.hsleiden.studyprogressapp.databinding.ActivityMainBinding;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllCourses().observe(this, courses -> {
             courseListAdapter.setCourses(courses);
         });
+
+        viewModel.getErrorMessage().observe(this, e -> Toast.makeText(getApplicationContext(), e, Toast.LENGTH_LONG).show());
 
         // searchView setup
         mainBinding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
