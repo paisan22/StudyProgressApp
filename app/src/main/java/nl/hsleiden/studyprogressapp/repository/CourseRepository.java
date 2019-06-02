@@ -32,12 +32,7 @@ public class CourseRepository {
 
     public void deleteAllCoures() {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                courseDAO.deleteAll();
-            }
-        }).start();
+        new Thread(() -> courseDAO.deleteAll()).start();
     }
 
     public LiveData<List<Course>> getAllCourses() {
@@ -50,12 +45,7 @@ public class CourseRepository {
 
     public void insertAllCourses(List<Course> courses) {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                courseDAO.insertAll(courses);
-            }
-        }).start();
+        new Thread(() -> courseDAO.insertAll(courses)).start();
     }
 
     public void insertCourse(Course course) {
@@ -63,11 +53,10 @@ public class CourseRepository {
     }
 
     public void updateCourse(Course course) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                courseDAO.updateCourse(course);
-            }
-        }).start();
+        new Thread(() -> courseDAO.updateCourse(course)).start();
+    }
+
+    public void deleteCourse(Course course) {
+        new Thread(() -> courseDAO.deleteCourse(course)).start();
     }
 }

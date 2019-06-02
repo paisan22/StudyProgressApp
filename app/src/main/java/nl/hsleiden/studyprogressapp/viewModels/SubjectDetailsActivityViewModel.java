@@ -26,6 +26,10 @@ public class SubjectDetailsActivityViewModel extends ViewModel {
         context.startActivity(intent);
     }
 
+    public void deleteCourse(Course course) {
+        courseRepository.deleteCourse(course);
+    }
+
     public Course getCourse() {
         return this.course;
     }

@@ -1,13 +1,14 @@
 package nl.hsleiden.studyprogressapp.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -45,31 +46,41 @@ public class SubjectDetailsActivity extends AppCompatActivity {
         Course course = viewModel.getCourse();
         setView(course, detailsBinding);
 
-        detailsBinding.btnSaveDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        detailsBinding.btnSaveDelete.setOnClickListener(v -> {
 
-                try {
-                    String name = Objects.requireNonNull(detailsBinding.subjectDetailsNameValue.getText()).toString();
-                    int ects = Integer.parseInt(detailsBinding.subjectDetailsEctsValue.getText().toString());
-                    double grade = Double.parseDouble(Objects.requireNonNull(detailsBinding.subjectDetailsGradeValue.getText()).toString());
-                    int studyYearValueText = Integer.parseInt(Objects.requireNonNull(detailsBinding.subjectDetailsStudyYearValue.getText()).toString());
-                    int period = Integer.parseInt(detailsBinding.subjectDetailsPeriodValue.getText().toString());
-                    String notes = Objects.requireNonNull(detailsBinding.subjectDetailsNotesValue.getText()).toString();
-                    boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
+            new AlertDialog.Builder(this)
+                    .setTitle("Verwijderen vak")
+                    .setMessage(String.format("Weet je zeker dat je het vak %s wilt verwijderen", course.getName()))
+                    .setPositiveButton("Ja", (dialog, which) -> {
+                        viewModel.deleteCourse(course);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    })
+                    .setNegativeButton("Nee", null)
+                    .show();
+        });
 
-                    course.setName(name);
-                    course.setEcts(ects);
-                    course.setGrade(grade);
-                    course.setStudyYear(studyYearValueText);
-                    course.setPeriod(period);
-                    course.setNotes(notes);
-                    course.setRequired(required);
+        detailsBinding.btnSaveDetails.setOnClickListener(v -> {
 
-                    viewModel.updateCourse(course, v.getContext());
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getApplicationContext(), "De wijzigingen zijn niet gelukt door onjuiste invoer.", Toast.LENGTH_LONG).show();
-                }
+            try {
+                String name = Objects.requireNonNull(detailsBinding.subjectDetailsNameValue.getText()).toString();
+                int ects = Integer.parseInt(detailsBinding.subjectDetailsEctsValue.getText().toString());
+                double grade = Double.parseDouble(Objects.requireNonNull(detailsBinding.subjectDetailsGradeValue.getText()).toString());
+                int studyYearValueText = Integer.parseInt(Objects.requireNonNull(detailsBinding.subjectDetailsStudyYearValue.getText()).toString());
+                int period = Integer.parseInt(detailsBinding.subjectDetailsPeriodValue.getText().toString());
+                String notes = Objects.requireNonNull(detailsBinding.subjectDetailsNotesValue.getText()).toString();
+                boolean required = detailsBinding.subjectDetailsRequiredValue.isChecked();
+
+                course.setName(name);
+                course.setEcts(ects);
+                course.setGrade(grade);
+                course.setStudyYear(studyYearValueText);
+                course.setPeriod(period);
+                course.setNotes(notes);
+                course.setRequired(required);
+
+                viewModel.updateCourse(course, v.getContext());
+            } catch (NumberFormatException e) {
+                Toast.makeText(getApplicationContext(), "De wijzigingen zijn niet gelukt door onjuiste invoer.", Toast.LENGTH_LONG).show();
             }
         });
     }

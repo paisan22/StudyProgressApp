@@ -2,6 +2,7 @@ package nl.hsleiden.studyprogressapp.database.DAOs;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -34,4 +35,7 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM course WHERE studyYear = :studyYear")
     public abstract LiveData<List<Course>> getAllCoursesByStudyYear(int studyYear);
+
+    @Delete
+    void deleteCourse(Course course);
 }
