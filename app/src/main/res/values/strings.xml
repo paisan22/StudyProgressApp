@@ -33,4 +33,6 @@
     <string name="grades_overview">Cijfers overzicht</string>
     <string name="ects_per_year">ECTS per jaar</string>
     <string name="btn_delete_course">Verwijder</string>
+    <string name="add_new_course">Nieuw vak toevoegen</string>
+    <string name="btn_add_course">Toevoegen</string>
 </resources>

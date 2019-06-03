@@ -26,7 +26,7 @@ public class Course implements Serializable {
     /**
      * Wordt gebruikt door Room.
      */
-    public Course(int id, String name, int ects, double grade, String notes, int period, int studyYear) {
+    public Course(int id, String name, int ects, double grade, String notes, int period, int studyYear, boolean required) {
         this.id = id;
         this.name = name;
         this.ects = ects;
@@ -34,19 +34,21 @@ public class Course implements Serializable {
         this.notes = notes;
         this.period = period;
         this.studyYear = studyYear;
+        this.required = required;
     }
 
     /**
      * Omdat room niet met meerdere constructors kan omgaan wordt hier ignore gebruikt.
      */
     @Ignore
-    public Course(String name, int ects, double grade, String notes, int period, int studyYear) {
+    public Course(String name, int ects, double grade, String notes, int period, int studyYear, boolean required) {
         this.name = name;
         this.ects = ects;
         this.grade = grade;
         this.notes = notes;
         this.period = period;
         this.studyYear = studyYear;
+        this.required = required;
     }
 
     public int getStudyYear() {

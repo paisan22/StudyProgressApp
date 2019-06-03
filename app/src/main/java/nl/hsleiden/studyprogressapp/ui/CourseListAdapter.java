@@ -102,11 +102,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
         }
 
         public void setData(Course course) {
-
+            MaterialCardView cardView;
+            cardView = (MaterialCardView) itemView;
             if (course.getGrade() < 5.5) {
-                MaterialCardView cardView;
-                cardView = (MaterialCardView) itemView;
                 cardView.setCardBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_warning));
+            } else {
+                cardView.setCardBackgroundColor(itemView.getContext().getResources().getColor(R.color.color_ok));
             }
 
             TextView name = (TextView) itemView.findViewById(R.id.subject_list_item_name);

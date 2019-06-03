@@ -49,7 +49,7 @@ public class CourseRepository {
     }
 
     public void insertCourse(Course course) {
-        courseDAO.insertCourse(course);
+        new Thread(() -> courseDAO.insertCourse(course)).start();
     }
 
     public void updateCourse(Course course) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import nl.hsleiden.studyprogressapp.R;
+import nl.hsleiden.studyprogressapp.ui.AddCourseActivity;
 import nl.hsleiden.studyprogressapp.ui.GradeBarChartActivity;
 import nl.hsleiden.studyprogressapp.ui.MainActivity;
 import nl.hsleiden.studyprogressapp.ui.ProgressActivity;
@@ -18,12 +19,10 @@ public class MenuHandler {
                 context.startActivity(new Intent(context, MainActivity.class));
                 break;
             }
-
             case R.id.menu_progress_ects: {
                 context.startActivity(new Intent(context, ProgressActivity.class));
                 break;
             }
-
             case R.id.menu_reset_courses: {
                 Intent intent = new Intent();
                 intent.setClass(context, MainActivity.class);
@@ -31,9 +30,13 @@ public class MenuHandler {
                 context.startActivity(intent);
                 break;
             }
-
             case R.id.menu_barchart_grades: {
                 context.startActivity(new Intent(context, GradeBarChartActivity.class));
+                break;
+            }
+            case R.id.menu_add_course: {
+                context.startActivity(new Intent(context, AddCourseActivity.class));
+                break;
             }
         }
     }
