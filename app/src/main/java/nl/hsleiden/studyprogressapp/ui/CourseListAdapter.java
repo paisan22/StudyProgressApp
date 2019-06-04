@@ -63,7 +63,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.My
                 e.printStackTrace();
                 courseList.addAll(courseListFull);
             }
-
             notifyDataSetChanged();
         }
     };
